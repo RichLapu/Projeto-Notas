@@ -48,6 +48,10 @@
                         <strong>{{ date('d/m/Y H:i:s', strtotime($note['created_at'])) }}</strong>
                     </small>
 
+                    <small class="text-muted">
+                        <i class="fa-regular fa-clock"></i> Atualizado em: {{ $nota->updated_at->format('d/m/Y \à\s H:i') }}
+                    </small>
+
                     <!-- Exibe a etiqueta de Lembrete caso exista -->
                     @if(!empty($note['reminder_at']))
                         <br>
