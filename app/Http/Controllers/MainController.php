@@ -81,7 +81,7 @@ class MainController extends Controller
         $note = new Note();
         $note->user_id = $id;
         $note->title = $request->text_title;
-        $note->text = clean($request->text_note); // Aplicação do HTMLPurifier
+        $note->text = $request->text_note;// Aplicação do HTMLPurifier
         $note->is_protected = $request->has('is_protected'); // <-- Salvando a Proteção
         $note->save();
 
@@ -149,7 +149,7 @@ class MainController extends Controller
 
         // update note
         $note->title = $request->text_title;
-        $note->text = clean($request->text_note); // Aplicação do HTMLPurifier
+        $note->text = $request->text_note; // Aplicação do HTMLPurifier
         $note->is_protected = $request->has('is_protected'); // <-- Atualizando a Proteção
         $note->save();
 
@@ -324,7 +324,7 @@ class MainController extends Controller
 
         if ($note) {
             $note->title = $request->title;
-            $note->text_note = clean($request->text_note); // Aplicação do HTMLPurifier
+            $note->text_note = $request->text_note; // Aplicação do HTMLPurifier
             $note->save();
 
             return response()->json([
@@ -381,7 +381,7 @@ class MainController extends Controller
                     ->first();
         
         if ($note) {
-            $note->text = clean($request->text_note); // Aplicação do HTMLPurifier
+            $note->text = $request->text_note; // Aplicação do HTMLPurifier
             $note->save();
             return response()->json(['status' => 'success']);
         }
