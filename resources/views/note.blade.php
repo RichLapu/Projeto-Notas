@@ -25,9 +25,9 @@
 <div class="row mb-4">
     <div class="col">
         <!-- O cartão muda a borda se estiver vencendo/vencido -->
-        <div class="card p-4 bg-body-tertiary {{ $isDue ? 'border border-2 border-danger shadow' : '' }}">
+        <div class="card p-3 p-md-4 bg-body-tertiary {{ $isDue ? 'border border-2 border-danger shadow' : '' }}">
             <div class="row">
-                <div class="col">
+                <div class="col-12">
                     @if(isset($note['categories']) && count($note['categories']) > 0)
                         <div class="mb-2">
                             @foreach($note['categories'] as $cat)
@@ -65,7 +65,7 @@
                     @endif
                 </div>
                 
-                <div class="col text-end align-items-center d-flex justify-content-end">
+                <div class="col-12 col-md-5 d-flex d-flex justify-content-end">
                     
                     <!-- Botão de Lembrete -->
                     <button type="button" class="btn btn-outline-{{ $bellColor }} btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#reminderModal{{ $note['id'] }}" title="Configurar Prazo">
@@ -97,7 +97,7 @@
             @endphp
 
             @if(isset($note['is_protected']) && $note['is_protected'] && !$isUnlocked)
-                <div class="text-center p-4 bg-dark rounded border border-warning" id="locked-state-{{ $note['id'] }}">
+                <div class="text-center p-3 p-md-4 bg-dark rounded border border-warning" id="locked-state-{{ $note['id'] }}">
                     <i class="fa-solid fa-shield-halved text-warning display-4 mb-3"></i>
                     <h5 class="text-warning">Conteúdo Protegido</h5>
                     <p class="text-secondary small mb-4">Esta nota contém informações sensíveis e está no Cofre.</p>
@@ -128,7 +128,7 @@
                 <h6 class="modal-title"><i class="fa-regular fa-bell me-2"></i>Definir Prazo</h6>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center p-4">
+            <div class="modal-body text-center p-3 p-md-4">
                 <label class="form-label text-secondary small">Escolha a data e a hora limite:</label>
                 <!-- Formata a data para exibir corretamente no input nativo do navegador -->
                 <input type="datetime-local" class="form-control mb-2 text-center" id="reminderInput{{ $note['id'] }}" 
@@ -194,7 +194,7 @@
                 <h6 class="modal-title"><i class="fa-solid fa-lock me-2"></i>Acesso Restrito</h6>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center p-4">
+            <div class="modal-body text-center p-3 p-md-4">
                 <p class="small text-secondary mb-3">Confirme sua senha de acesso para abrir o cofre.</p>
                 <input type="password" class="form-control mb-2 text-center" id="vaultPassword{{ $note['id'] }}" placeholder="Sua senha...">
                 <span class="text-danger small d-none" id="vaultError{{ $note['id'] }}">Senha incorreta. Tente novamente.</span>

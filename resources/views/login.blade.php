@@ -16,7 +16,7 @@
                 </div>
 
                 <!-- Lado Direito: Formulário -->
-                <div class="col-md-7 p-5 bg-body-tertiary">
+                <div class="col-md-7 p-4 p-md-5 bg-body-tertiary">
                     
                     <div class="text-center mb-4">
                         <img src="{{ asset('assets/images/logo.png') }}" alt="Notas Logo" class="d-md-none mb-3 img-fluid">

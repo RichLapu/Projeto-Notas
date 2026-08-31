@@ -19,6 +19,19 @@
         margin-top: 10px;
         margin-bottom: 10px;
     }
+    /* Responsividade para o conteúdo do Quill */
+@media (max-width: 768px) {
+    .ql-editor {
+        padding: 10px 0; /* Remove o excesso de margem lateral no celular */
+        font-size: 16px; /* Evita que o iPhone dê zoom automático em inputs */
+    }
+}
+/* Faz tabelas inseridas quebrarem ou rolarem, evitando vazar a tela */
+.ql-editor table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
 </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
