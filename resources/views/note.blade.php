@@ -43,17 +43,17 @@
                         {{ $note['title'] }}
                     </h3>
                     
-                    <div class="d-flex flex-column mb-2">
+                    <div class="mb-2">
                         <small class="text-secondary note-meta-custom">
                             <span class="opacity-75 me-1">Criado:</span>
                             <strong>{{ date('d/m/Y H:i', strtotime($note['created_at'])) }}</strong>
-                        </small>
-                        @if($note['created_at'] !== $note['updated_at'])
-                            <small class="text-secondary note-meta-custom" title="Última modificação">
-                                <i class="fa-solid fa-pen opacity-75 me-1" style="font-size: 0.7rem;"></i>
+                            
+                            @if($note['created_at'] !== $note['updated_at'])
+                                <span class="mx-2 opacity-50">|</span>
+                                <span class="opacity-75 me-1">Alterado:</span>
                                 <strong>{{ date('d/m/Y H:i', strtotime($note['updated_at'])) }}</strong>
-                            </small>
-                        @endif
+                            @endif
+                        </small>
                     </div>
 
                     <!-- Exibe a etiqueta de Lembrete caso exista -->
