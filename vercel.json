@@ -9,15 +9,15 @@
     "routes": [
         {
             "src": "/build/(.*)",
-            "dest": "/build/$1"
+            "dest": "/public/build/$1"
         },
         {
             "src": "/assets/(.*)",
-            "dest": "/assets/$1"
+            "dest": "/public/assets/$1"
         },
         {
-            "src": "/favicon.ico",
-            "dest": "/favicon.ico"
+            "src": "/(favicon\\.ico|logo\\.png|favicon\\.png)",
+            "dest": "/public/$1"
         },
         {
             "src": "/(.*)",
