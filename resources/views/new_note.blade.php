@@ -106,14 +106,14 @@
                             
                             <div class="hide-in-df">
                                 <div class="mb-3">
-                                    <label class="form-label">Note Title</label>
+                                    <label class="form-label">Título:</label>
                                     <input type="text" class="form-control" name="text_title" value="{{ old('text_title') }}">
                                     @error('text_title')
                                         <div class="text-danger mt-1">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Categorias</label>
+                                    <label class="form-label">Categorias:</label>
                                     <div class="d-flex gap-3 flex-wrap">
                                         @foreach($categories as $category)
                                             <div class="form-check">
@@ -132,7 +132,7 @@
                                     </label>
                                     <div class="form-text text-secondary"><i class="fa-solid fa-circle-info me-1"></i>O conteúdo desta nota será ocultado na tela inicial e exigirá sua senha para leitura.</div>
                                 </div>
-                                <label class="form-label">Note Text</label>
+                                <label class="form-label">Texto:</label>
                             </div>
                             
                             <div class="mb-3">
