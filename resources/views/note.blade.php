@@ -26,8 +26,12 @@
     <div class="col">
         <!-- O cartão muda a borda se estiver vencendo/vencido -->
         <div class="card p-3 p-md-4 bg-body-tertiary {{ $isDue ? 'border border-2 border-danger shadow' : '' }}">
-            <div class="row">
-                <div class="col-12">
+            
+            <!-- Início do Cabeçalho da Nota (Ajustado com Flexbox) -->
+            <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-start gap-3">
+                
+                <!-- Lado Esquerdo: Textos e Datas -->
+                <div class="flex-grow-1">
                     @if(isset($note['categories']) && count($note['categories']) > 0)
                         <div class="mb-2">
                             @foreach($note['categories'] as $cat)
@@ -58,33 +62,34 @@
 
                     <!-- Exibe a etiqueta de Lembrete caso exista -->
                     @if(!empty($note['reminder_at']))
-                        <br>
                         <small class="text-{{ $bellColor }} mt-1 d-inline-block fw-bold">
                             {!! $reminderText !!}
                         </small>
                     @endif
                 </div>
                 
-                <div class="col-12 col-md-5 d-flex d-flex justify-content-end">
+                <!-- Lado Direito: Botões -->
+                <div class="d-flex flex-wrap justify-content-start justify-content-lg-end gap-2 flex-shrink-0">
                     
                     <!-- Botão de Lembrete -->
-                    <button type="button" class="btn btn-outline-{{ $bellColor }} btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#reminderModal{{ $note['id'] }}" title="Configurar Prazo">
+                    <button type="button" class="btn btn-outline-{{ $bellColor }} btn-sm" data-bs-toggle="modal" data-bs-target="#reminderModal{{ $note['id'] }}" title="Configurar Prazo">
                         <i class="fa-{{ empty($note['reminder_at']) ? 'regular' : 'solid' }} fa-bell"></i>
                     </button>
 
-                    <a href="{{ route('exportPdf', ['id' => Crypt::encrypt($note['id'])]) }}" class="btn btn-outline-danger btn-sm mx-1" title="Exportar PDF"><i class="fa-regular fa-file-pdf"></i></a>
+                    <a href="{{ route('exportPdf', ['id' => Crypt::encrypt($note['id'])]) }}" class="btn btn-outline-danger btn-sm" title="Exportar PDF"><i class="fa-regular fa-file-pdf"></i></a>
                     
                     @if(!empty($note['public_id']))
-                        <button type="button" class="btn btn-outline-info btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#shareModal{{ $note['id'] }}" title="Configurar Link Público">
+                        <button type="button" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#shareModal{{ $note['id'] }}" title="Configurar Link Público">
                             <i class="fa-solid fa-share-nodes"></i>
                         </button>
                     @endif
                     
-                    <a href="{{ route('pin', ['id' => Crypt::encrypt($note['id'])]) }}" class="btn btn-outline-{{ $note['is_pinned'] ? 'warning' : 'secondary' }} btn-sm mx-1"><i class="fa-solid fa-thumbtack"></i></a>
-                    <a href="{{ route('edit', ['id' => Crypt::encrypt($note['id'])]) }}" class="btn btn-outline-secondary btn-sm mx-1"><i class="fa-regular fa-pen-to-square"></i></a>
-                    <a href="{{ route('delete', ['id' => Crypt::encrypt($note['id'])]) }}" class="btn btn-outline-danger btn-sm mx-1"><i class="fa-regular fa-trash-can"></i></a>
+                    <a href="{{ route('pin', ['id' => Crypt::encrypt($note['id'])]) }}" class="btn btn-outline-{{ $note['is_pinned'] ? 'warning' : 'secondary' }} btn-sm"><i class="fa-solid fa-thumbtack"></i></a>
+                    <a href="{{ route('edit', ['id' => Crypt::encrypt($note['id'])]) }}" class="btn btn-outline-secondary btn-sm"><i class="fa-regular fa-pen-to-square"></i></a>
+                    <a href="{{ route('delete', ['id' => Crypt::encrypt($note['id'])]) }}" class="btn btn-outline-danger btn-sm"><i class="fa-regular fa-trash-can"></i></a>
                 </div>
             </div>
+            <!-- Fim do Cabeçalho -->
             
             <div class="progress mt-3 mb-2 d-none checklist-progress" id="progress-{{ $note['id'] }}" style="height: 6px;">
                 <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
@@ -150,7 +155,6 @@
 <!-- Modal de Compartilhamento (MANTIDO) -->
 @if(!empty($note['public_id']))
 <div class="modal fade" id="shareModal{{ $note['id'] }}" tabindex="-1" aria-hidden="true">
-    <!-- ... HTML do seu modal de compartilhamento original ... -->
     <div class="modal-dialog">
         <div class="modal-content bg-dark text-light border-secondary">
             <div class="modal-header border-secondary">
@@ -187,7 +191,6 @@
 <!-- Modal de Cofre (MANTIDO) -->
 @if(isset($note['is_protected']) && $note['is_protected'])
 <div class="modal fade" id="unlockModal{{ $note['id'] }}" tabindex="-1" aria-hidden="true">
-    <!-- ... HTML do seu modal de cofre original ... -->
     <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content bg-dark text-light border-warning">
             <div class="modal-header border-warning text-warning">
@@ -211,7 +214,6 @@
 
 @once
 <script>
-    // ... [Funções antigas mantidas copyLink, saveExpiration, unlockVault] ...
     function copyLink(noteId) {
         var copyText = document.getElementById("publicLink" + noteId);
         copyText.select();
@@ -274,14 +276,11 @@
         .catch(error => console.error('Erro:', error));
     }
 
-    // NOVA FUNÇÃO DO LEMBRETE
     function saveReminder(noteId, remove = false) {
         var dateValue = document.getElementById("reminderInput" + noteId).value;
         var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        // Se clicou no botão da lixeira, enviamos nulo para limpar o prazo
         if(remove) { dateValue = null; }
-        // Se tentou salvar sem escolher data, ignoramos
         else if(!dateValue) { alert('Escolha uma data e hora.'); return; }
 
         fetch('{{ route("setReminder") }}', {
@@ -298,8 +297,6 @@
         .then(response => response.json())
         .then(data => {
             if(data.status === 'success') {
-                // Como as bordas e cores dependem do backend (PHP/Carbon),
-                // o jeito mais fácil e seguro de aplicar o novo visual é recarregando a página.
                 window.location.reload(); 
             } else {
                 alert('Erro ao salvar o lembrete.');
