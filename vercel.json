@@ -15,8 +15,23 @@
     ],
     "routes": [
         {
+            "src": "/build/(.*\\.js)",
+            "dest": "/public/build/$1",
+            "headers": { "content-type": "application/javascript" }
+        },
+        {
+            "src": "/build/(.*\\.css)",
+            "dest": "/public/build/$1",
+            "headers": { "content-type": "text/css" }
+        },
+        {
             "src": "/build/(.*)",
             "dest": "/public/build/$1"
+        },
+        {
+            "src": "/assets/(.*\\.png)",
+            "dest": "/public/assets/$1",
+            "headers": { "content-type": "image/png" }
         },
         {
             "src": "/assets/(.*)",
@@ -24,7 +39,8 @@
         },
         {
             "src": "/favicon.ico",
-            "dest": "/public/favicon.ico"
+            "dest": "/public/favicon.ico",
+            "headers": { "content-type": "image/x-icon" }
         },
         {
             "src": "/(.*)",
