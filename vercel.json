@@ -3,19 +3,12 @@
     "builds": [
         {
             "src": "api/index.php",
-            "use": "vercel-php@0.6.2",
-            "config": {
-                "awsLambdaRoutines": true
-            }
-        },
-        {
-            "src": "public/**",
-            "use": "@vercel/static"
+            "use": "vercel-php@0.6.2"
         }
     ],
     "routes": [
         {
-            "src": "/(build|css|js|images)/(.*)",
+            "src": "/(build|css|js|images|favicon.ico)/(.*)",
             "dest": "/public/$1/$2"
         },
         {
