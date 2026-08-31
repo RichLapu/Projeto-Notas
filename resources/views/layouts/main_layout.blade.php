@@ -9,7 +9,7 @@
     <!-- FontAwesome via CDN Oficial (Resolve o problema dos ícones sumidos na Vercel) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
-    <link rel="icon" href="{{ asset('favicon.png') }}?v=3" type="image/png">
+    <link rel="icon" href="{{ asset('assets/images/favicon.png') }}?v=4" type="image/png">
     <style>
     /* Força as imagens inseridas pelo Quill a serem responsivas */
     .card img, .ql-editor img {
