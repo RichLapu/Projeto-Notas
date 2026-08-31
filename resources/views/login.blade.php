@@ -9,9 +9,7 @@
                 <!-- Lado Esquerdo: Branding -->
                 <div class="col-md-5 bg-white text-dark d-none d-md-flex flex-column justify-content-center align-items-center p-5 text-center">
                     <!-- Logo original (removido o limite de height para manter proporção e qualidade real) -->
-                    <a href="{{ route('home') }}" class="navbar-brand">
-                        <img src="{{ asset('assets/images/logo.png') }}" alt="Notes Logo" style="height: 40px;">
-                    </a>
+                    <img src="{{ asset('assets/images/logo.png') }}" alt="Notas Logo" class="mb-3 img-fluid">
                     
                     <!-- Adicionado text-nowrap para não quebrar linha -->
                     <p class="small text-dark opacity-75 mb-0 fw-semibold text-nowrap">Sistema Integrado de Anotações e Lembretes</p>
